@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #cardList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Card Drawer</title>
+</head>
+<body>
+    <h1>Card Drawer</h1>
+
+    <button onclick="drawCards()">Draw 5 Cards</button>
+
+    <ul id="cardList"></ul>
+
+    <script>
+        const suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades'];
+        const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        const deck = [];
+
+        // Create a deck of 52 cards
+        for (const suit of suits) {
+            for (const rank of ranks) {
+                deck.push(`${rank} of ${suit}`);
+            }
+        }
+
+        function drawCards() {
+            const cardList = document.getElementById('cardList');
+            cardList.innerHTML = ''; // Clear previous cards
+
+            // Shuffle the deck
+            const shuffledDeck = deck.slice().sort(() => Math.random() - 0.5);
+
+            // Draw 5 cards
+            const drawnCards = shuffledDeck.slice(0, 5);
+
+            // Display the drawn cards in the UI
+            for (const card of drawnCards) {
+                const listItem = document.createElement('li');
+                listItem.className = 'card';
+                listItem.textContent = card;
+                cardList.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>
